@@ -26,9 +26,10 @@ public class Folder {
     @JsonIgnoreProperties({"folder"})
     private List<File> files;
 
-    public Folder(String name) {
+    public Folder(String name, User user) {
         this.name = name;
         this.files = new ArrayList<>();
+        this.user = user;
     }
 
     public Folder(){}
@@ -55,5 +56,13 @@ public class Folder {
 
     public void setFiles(List<File> files) {
         this.files = files;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

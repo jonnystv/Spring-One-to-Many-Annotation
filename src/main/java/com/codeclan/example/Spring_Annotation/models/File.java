@@ -28,9 +28,11 @@ public class File {
     @JoinColumn(name = "folder_id", nullable = false)
     private Folder folder;
 
-    public File(String name, String fileExtension, String fileSize) {
+    public File(String name, String fileExtension, String fileSize, Folder folder) {
         this.name = name;
+        this.fileExtension = fileExtension;
         this.fileSize = fileSize;
+        this.folder = folder;
     }
 
     public File(){}
@@ -65,5 +67,13 @@ public class File {
 
     public void setFileSize(String fileSize) {
         this.fileSize = fileSize;
+    }
+
+    public Folder getFolder() {
+        return folder;
+    }
+
+    public void setFolder(Folder folder) {
+        this.folder = folder;
     }
 }
