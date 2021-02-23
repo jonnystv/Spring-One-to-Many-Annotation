@@ -1,5 +1,7 @@
 package com.codeclan.example.Spring_Annotation.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +17,21 @@ public class Folder {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "files")
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnoreProperties({"folders"})
+    private User user;
+
+    @OneToMany(mappedBy = "folder")
+    @JsonIgnoreProperties({"folder"})
     private List<File> files;
 
-    public Folder(Long id, String name, List<File> files) {
-        this.id = id;
+    public Folder(String name) {
         this.name = name;
         this.files = new ArrayList<>();
     }
+
+    public Folder(){}
 
     public Long getId() {
         return id;

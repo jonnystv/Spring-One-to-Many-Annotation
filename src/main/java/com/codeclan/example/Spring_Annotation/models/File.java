@@ -1,5 +1,7 @@
 package com.codeclan.example.Spring_Annotation.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +17,18 @@ public class File {
     @Column(name = "file")
     private String name;
 
-    @Column(name = "file_size")
-    private int fileSize;
+    @Column(name = "file_extension")
+    private String fileExtension;
 
-    public File(Long id, String name, int fileSize) {
-        this.id = id;
+    @Column(name = "file_size")
+    private String fileSize;
+
+    @ManyToOne
+    @JsonIgnoreProperties({"files"})
+    @JoinColumn(name = "folder_id", nullable = false)
+    private Folder folder;
+
+    public File(String name, String fileExtension, String fileSize) {
         this.name = name;
         this.fileSize = fileSize;
     }
@@ -42,11 +51,19 @@ public class File {
         this.name = name;
     }
 
-    public int getFileSize() {
+    public String getFileExtension() {
+        return fileExtension;
+    }
+
+    public void setFileExtension(String name) {
+        this.name = fileExtension;
+    }
+
+    public String getFileSize() {
         return fileSize;
     }
 
-    public void setFileSize(int fileSize) {
+    public void setFileSize(String fileSize) {
         this.fileSize = fileSize;
     }
 }
